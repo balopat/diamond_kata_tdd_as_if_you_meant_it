@@ -22,10 +22,13 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
     printDiamond('B').indexWhere(_.contains("B")) should be(1)
   }
 
-  "For B, the diamond printer" should "have two B-s printed with two spaces separated in the second line" in {
-    printDiamond('B').indexWhere(_.contains("B  B")) should be(1)
+  "For B, the diamond printer" should "have two B-s printed with one space separated in the second line" in {
+    printDiamond('B').indexWhere(_.contains("B B")) should be(1)
   }
 
+  "For C, the diamond printer" should "have two B-s printed with one space separated in the second line + one indentation" in {
+    printDiamond('C').indexWhere(_.contains(" B B")) should be(1)
+  }
 
   def indentLines(previousCharacter: Char): List[String] = {
     printDiamond(previousCharacter).map(" " + _)
@@ -36,7 +39,8 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
       case 'A' =>   List(char.toString)
       case 'B' =>
             val lines = indentLines('A')
-            lines ++ List(char + "  " + char) ++ lines
+            lines ++ List(char + " " + char) ++ lines
+      case 'C' => indentLines('B')
     }
 
 
