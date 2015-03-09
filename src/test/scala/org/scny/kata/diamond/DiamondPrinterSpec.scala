@@ -30,7 +30,7 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
     printDiamond('C').indexWhere(_.contains(" B B")) should be(1)
   }
 
-  "For B, the diamond printer" should "have two double indented A-s" in {
+  "For C, the diamond printer" should "have two double indented A-s" in {
     printDiamond('C').count(_ == "  A" ) should be(2)
   }
 
