@@ -23,7 +23,7 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
     val input = 'B'
 
     val lines = indentLines('A')
-    val diamondLines = lines ++ lines
+    val diamondLines = lines ++ List("B") ++ lines
 
     diamondLines.count(_ == " A" ) should be(2)
   }
