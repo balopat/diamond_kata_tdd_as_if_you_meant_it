@@ -6,21 +6,15 @@ import org.scalatest.{Matchers, FlatSpec}
 class DiamondPrinterSpec extends FlatSpec with Matchers {
 
   "For A, the diamond printer" should "give back two lines of A" in {
-    val input = 'A'
-
-    val diamondLines = List(
-      "A")
-
-
-    diamondLines should be(List(
+    printDiamond('A') should be(List(
       "A"))
   }
+
 
   "For B, the diamond printer" should "indent A by one space" in {
     val input = 'B'
 
-    val diamondLines =   List(
-      " A")
+    val diamondLines =  printDiamond('A').map(" " + _)
 
     diamondLines should contain(" A")
   }
@@ -28,11 +22,15 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
   "For B, the diamond the printer" should "have another indented A at the end" in {
     val input = 'B'
 
-    val diamondLines =   List(
-      " A",
-      " A")
+    val lines = printDiamond('A').map(" " + _)
+    val diamondLines = lines ++ lines
 
     diamondLines.count(_ == " A" ) should be(2)
+  }
+
+
+  def printDiamond(char:Char): List[String] = {
+    List(char.toString)
   }
 
 
