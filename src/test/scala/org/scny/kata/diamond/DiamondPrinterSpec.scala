@@ -10,29 +10,16 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
       "A"))
   }
 
-
   "For B, the diamond printer" should "indent A by one space" in {
-    val input = 'B'
-
-    val diamondLines =  indentLines('A')
-
-    diamondLines should contain(" A")
+    printDiamond('B') should contain(" A")
   }
 
   "For B, the diamond the printer" should "have another indented A at the end" in {
-    val input = 'B'
-
-    val diamondLines: List[String] = printDiamondForB
-
-    diamondLines.count(_ == " A" ) should be(2)
+    printDiamond('B').count(_ == " A" ) should be(2)
   }
 
   "For B, the diamond the printer" should "have B in the second lines too" in {
-    val input = 'B'
-
-    val diamondLines: List[String] = printDiamondForB
-
-    diamondLines.indexWhere(_.contains("B")) should be(1)
+    printDiamond('B').indexWhere(_.contains("B")) should be(1)
   }
 
 
@@ -41,13 +28,18 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
   }
 
   def printDiamond(char:Char): List[String] = {
-    List(char.toString)
+    char match {
+      case 'A' =>   List(char.toString)
+      case 'B' =>  {
+            val lines = indentLines('A')
+            val diamondLines = lines ++ List(char.toString) ++ lines
+            diamondLines
+        }
+    }
+
+
   }
 
-  def printDiamondForB: List[String] = {
-    val lines = indentLines('A')
-    val diamondLines = lines ++ List("B") ++ lines
-    diamondLines
-  }
+
 
 }
