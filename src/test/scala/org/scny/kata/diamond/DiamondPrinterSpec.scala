@@ -28,6 +28,15 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
     diamondLines.count(_ == " A" ) should be(2)
   }
 
+  "For B, the diamond the printer" should "have B in one of the lines too" in {
+    val input = 'B'
+
+    val lines = printDiamond('A').map(" " + _)
+    val diamondLines = lines ++ List("B") ++ lines
+
+    diamondLines.count(_.contains("B")) should be(1)
+  }
+
 
   def printDiamond(char:Char): List[String] = {
     List(char.toString)
