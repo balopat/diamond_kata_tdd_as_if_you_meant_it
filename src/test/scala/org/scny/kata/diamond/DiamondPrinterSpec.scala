@@ -18,13 +18,17 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
       "A"))
   }
 
-  "When I print a B in diamond the printer" should "give back two lines of A, and a B in the middle" in {
+  "When I print a B in diamond the printer" should "give back two lines of A, and two Bs in the middle" in {
     val input = 'B'
 
-    val diamondLines = List(
-      " A",
-      "B B",
-      " A")
+    val previousStepShifted = List(
+      "A",
+      "A").map(" " + _)
+
+    val insertPosition =  previousStepShifted.length/2
+    val split = previousStepShifted.splitAt(insertPosition)
+    val spaces = " "
+    val diamondLines = split._1 ++ List(input + spaces + input) ++ split._2
 
     diamondLines should be(List(
       " A",
