@@ -30,13 +30,13 @@ class DiamondPrinterSpec extends FlatSpec with Matchers {
 
 
 
-  "For B, the diamond the printer" should "have B in one of the lines too" in {
+  "For B, the diamond the printer" should "have B in the second lines too" in {
     val input = 'B'
 
     val lines = indentLines('A')
-    val diamondLines = lines ++  lines ++ List("B")
+    val diamondLines = lines ++ List("B") ++ lines
 
-    diamondLines.count(_.contains("B")) should be(1)
+    diamondLines.indexWhere(_.contains("B")) should be(1)
   }
 
 
